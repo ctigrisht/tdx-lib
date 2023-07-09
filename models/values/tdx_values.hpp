@@ -1,10 +1,11 @@
 #pragma once
 
+#include <optional>
+
 #include "tdx_value.hpp"
-#include "string_encoding.hpp"
+#include "../string_encoding.hpp"
 
-
-namespace tdx_models
+namespace tdx_values
 {
     class tdx_null final : public tdx_value
     {
@@ -22,7 +23,8 @@ namespace tdx_models
     public:
         tdx_value_type get_type() final { return tdx_value_type::string; }
 
-        std::string Value;
+        bool is_null = true;
+        std::optional<std::string> value;
         tdx_string_encoding Encoding = tdx_string_encoding::UTF_8;
 
         bytes_uptr serialize() final
@@ -36,7 +38,8 @@ namespace tdx_models
     public:
         tdx_value_type get_type() final { return tdx_value_type::int16; }
 
-        std::int_fast16_t Value = 0;
+        bool is_null = true;
+        std::optional<std::int_fast16_t> value = 0;
 
         bytes_uptr serialize() final
         {
@@ -49,7 +52,8 @@ namespace tdx_models
     public:
         tdx_value_type get_type() final { return tdx_value_type::int32; }
 
-        std::int_fast32_t Value = 0;
+        bool is_null = true;
+        std::optional<std::int_fast32_t> value = 0;
 
         bytes_uptr serialize() final
         {
@@ -62,9 +66,9 @@ namespace tdx_models
     public:
         tdx_value_type get_type() final { return tdx_value_type::int64; }
 
-        std::int_fast64_t Value = 0;
+        bool is_null = true;
+        std::optional<std::int_fast64_t> value = 0;
 
-        _Decimal128 lsf = 0;
         bytes_uptr serialize() final
         {
             throw "noimpl";
@@ -76,7 +80,8 @@ namespace tdx_models
     public:
         tdx_value_type get_type() final { return tdx_value_type::uint16; }
 
-        std::uint_fast16_t Value = 0;
+        bool is_null = true;
+        std::optional<std::uint_fast16_t> value = 0;
 
         bytes_uptr serialize() final
         {
@@ -89,7 +94,8 @@ namespace tdx_models
     public:
         tdx_value_type get_type() final { return tdx_value_type::uint32; }
 
-        std::uint_fast32_t Value = 0;
+        bool is_null = true;
+        std::optional<std::uint_fast32_t> value = 0;
 
         bytes_uptr serialize() final
         {
@@ -102,7 +108,8 @@ namespace tdx_models
     public:
         tdx_value_type get_type() final { return tdx_value_type::uint64; }
 
-        std::uint_fast64_t Value = 0;
+        bool is_null = true;
+        std::optional<std::uint_fast64_t> value = 0;
 
         bytes_uptr serialize() final
         {
@@ -110,4 +117,41 @@ namespace tdx_models
         }
     };
 
+    class tdx_decimal final : public tdx_value
+    {
+    public:
+        tdx_value_type get_type() final { return tdx_value_type::decimal; }
+
+        bool is_null = true;
+        std::optional<_Decimal128> value = 0;
+
+        bytes_uptr serialize() final
+        {
+            throw "noimpl";
+        }
+    };
+
+    class tdx_blob final : public  tdx_value {
+    public:
+        tdx_value_type get_type() final {return tdx_value_type::blob;}
+
+        bool is_null = true;
+        std::optional<std::byte[]> value = std::make_optional<std::byte[]>();
+
+        bytes_uptr serialize() final{
+            throw;
+        }
+    };
+
+    class tdx_blob_ref : public  tdx_value {
+    public:
+        tdx_value_type get_type() final { return tdx_value_type::blob_ref; }
+
+        bool is_null = true;
+        std::optional<std::string> value = std::make_optional();
+
+        bytes_uptr serialize() final {
+            throw;
+        }
+    };
 }

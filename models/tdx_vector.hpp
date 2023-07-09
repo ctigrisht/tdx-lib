@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-#include "tdx_value.hpp"
+#include "values/tdx_value.hpp"
 
 namespace tdx_models
 {

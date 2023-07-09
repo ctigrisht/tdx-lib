@@ -3,9 +3,11 @@
 #include <string>
 #include <memory>
 
+// #include <magic_enum/magic_enum.hpp>
+
 using bytes_uptr = std::unique_ptr<std::byte[]>;
 
-namespace tdx_models
+namespace tdx_values
 {
     enum struct tdx_value_type
     {
@@ -44,6 +46,10 @@ namespace tdx_models
 
         virtual bytes_uptr serialize();
         virtual tdx_value_type get_type();
+        std::string get_type_name(){
+            // return (std::string)magic_enum::enum_name(get_type());
+            return "";
+        }
     };
 
 }
