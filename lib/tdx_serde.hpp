@@ -1,17 +1,14 @@
 #pragma once
 
-#include <cstdint>
-#include <memory>
+// #include <cstdint>
+// #include <memory>
+// #include <vector>
 
 #include "../models/tdx_document.hpp"
 
 namespace tdx_serde{
-    tdx_models::tdx_document deserialize(){
-        throw "Not implemented";
-    }
+    tdx_models::tdx_document _deserialize();
 
-    std::shared_ptr<std::byte[]> serialize(){
-        throw "Not implemented";
-    }
+    std::unique_ptr<std::byte[]> _serialize();
     
 }
