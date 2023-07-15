@@ -38,11 +38,11 @@ namespace internal_serializers {
 
     bytes_uptr serialize_json(tdx_json value);
 
-    bytes_uptr serialize_document();
+    bytes_uptr serialize_document(tdx_document value);
 
-    bytes_uptr serialize_guid();
-
-    bytes_uptr serialize_uint64_id();
-
-    bytes_uptr serialize_link_ref();
+//    bytes_uptr serialize_guid();
+//
+//    bytes_uptr serialize_uint64_id();
+//
+//    bytes_uptr serialize_link_ref();
 }

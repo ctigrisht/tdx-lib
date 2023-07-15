@@ -26,21 +26,36 @@ namespace tdx_values {
             value = std::nullopt;
         }
 
-        tdx_string(std::string l_value) {
-            value = l_value;
+        tdx_string(std::u8string l_value) {
+            u8value = l_value;
+            encoding = tdx_models::tdx_string_encoding::UTF_8;
+            is_null = false;
+        }
+        tdx_string(std::u16string l_value){
+            u16value = l_value;
+            encoding = tdx_models::tdx_string_encoding::UTF_16;
+            is_null = false;
+        }
+        tdx_string(std::u32string l_value){
+            u32value = l_value;
+            encoding = tdx_models::tdx_string_encoding::UTF_32;
             is_null = false;
         }
 
-        tdx_string(std::string l_value, tdx_models::tdx_string_encoding l_encoding) {
-            value = l_value;
-            encoding = l_encoding;
-            is_null = false;
-        }
+//        tdx_string(bytes_uptr l_value, tdx_models::tdx_string_encoding l_encoding) {
+//            value = l_value;
+//            encoding = l_encoding;
+//            is_null = false;
+//        }
 
         tdx_value_type get_type() final { return tdx_value_type::string; }
 
         bool is_null = true;
-        std::optional <std::string> value;
+
+        std::optional <std::u8string> u8value;
+        std::optional <std::u16string> u16value;
+        std::optional <std::u32string> u32value;
+
         tdx_models::tdx_string_encoding encoding;
 
         bytes_uptr serialize() final {
@@ -256,7 +271,8 @@ namespace tdx_values {
     class tdx_json final : public tdx_value {
     public:
         tdx_json() { value = std::nullopt; }
-        tdx_json(nlohmann::json l_value){
+
+        tdx_json(nlohmann::json l_value) {
             value = l_value;
             is_null = false;
         }
