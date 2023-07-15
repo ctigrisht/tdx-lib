@@ -3,14 +3,12 @@
 #include <string>
 #include <memory>
 
-// #include <magic_enum/magic_enum.hpp>
+#include "magic_enum/magic_enum.hpp"
 
 using bytes_uptr = std::unique_ptr<std::byte[]>;
 
-namespace tdx_values
-{
-    enum struct tdx_value_type
-    {
+namespace tdx_values {
+    enum struct tdx_value_type : int_fast32_t {
         null = 0,
         string = 1,
         int16 = 2,
@@ -29,26 +27,28 @@ namespace tdx_values
         blob_ref = 15,
         json = 16,
         document = 17,
-        
+
         guid = 100,
         uint64_id = 101,
 
         // relationships
-        link_ref = 500,        
+        link_ref = 500,
     };
 
-    class tdx_value
-    {
+    class tdx_value {
     private:
     public:
-        const bool IsNull;
-        const tdx_value_type Type = tdx_value_type::null;
+        tdx_value();
+
+        virtual ~tdx_value();
 
         virtual bytes_uptr serialize();
+
         virtual tdx_value_type get_type();
-        std::string get_type_name(){
-            // return (std::string)magic_enum::enum_name(get_type());
-            return "";
+
+        std::string get_type_name() {
+            return (std::string) magic_enum::enum_name(get_type());
+            //return "";
         }
     };
 

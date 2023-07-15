@@ -1,10 +1,12 @@
 #pragma once
 
 #include <unordered_map>
+#include <vector>
 #include <string>
 
 #include "values/tdx_value.hpp"
-
+#include "tdx_property.hpp"
+#include "tdx_link.hpp"
 // using namespace std;
 
 namespace tdx_models{
@@ -13,9 +15,9 @@ namespace tdx_models{
     private:
         /* data */
     public:
-        std::string Header;
-        std::unordered_map<std::string, tdx_values::tdx_value> Values;
-        tdx_values::tdx_value_type Type = tdx_values::tdx_value_type::int32;
+        std::string header;
+        std::unordered_map<std::string, tdx_property> values;
+        std::vector<tdx_link> links;
 
         tdx_document(/* args */);
         ~tdx_document();

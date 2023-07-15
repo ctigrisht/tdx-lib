@@ -6,10 +6,11 @@
 
 
 extern "C" int serialize(){
-    auto doc = new tdx_values::tdx_blob_ref{
-        .is_null = false,
-        .value = std::make_optional<std::string>()
-    };
+    tdx_values::tdx_blob_ref doc = tdx_values::tdx_blob_ref();
+
+//    tdx_values::tdx_blob_ref blob;
+
+    doc.is_null = true;
 
     return 0;
 }
