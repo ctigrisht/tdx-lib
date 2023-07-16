@@ -13,51 +13,54 @@ using namespace tdx_models;
 using namespace tdx_values;
 
 namespace internal_serializers {
-    bytes_uptr serialize_string(tdx_string& value) {
-        switch (value.encoding) {
-            case tdx_string_encoding::UTF_8: {
-                break;
-            }
-            case tdx_string_encoding::UTF_16: {
-                break;
-            }
-            case tdx_string_encoding::UTF_32: {
-                break;
-            }
-            default: throw "ASCII not implemented";
-        }
-    }
-
     bytes_uptr serialize_string_utf8(const_sptr<std::u8string> value) {
         int length = value->length();
 
-        std::byte bytes[length];
-        std::transform(
-                value->begin()),
-                value->end(),
-                bytes,
-                [](const char& character){
-                    return std::byte(character);
-                });
+        auto ret_bytes = std::make_unique<std::byte[]>(length);
 
-        return std::make_unique<std::byte[]>(bytes);
-    }
+        std::byte tmp_bytes[length];
 
-    bytes_uptr serialize_string_utf16(const_sptr<std::u16string> value) {
-        int length = value->length();
-
-        std::byte bytes[length];
         std::transform(
                 value->begin(),
                 value->end(),
-                bytes,
+                tmp_bytes,
                 [](const char& character){
                     return std::byte(character);
                 });
+
+        for (int i = 0; i < length; i++)
+            ret_bytes[i] = tmp_bytes[i];
+
+        return std::move(ret_bytes);
+    }
+
+    bytes_uptr serialize_string_utf16(const_sptr<std::u16string> value) {
+        throw "UTF-16 not implemented";
+//        int length = value->length();
+//
+//        std::byte bytes[length];
+//        std::transform(
+//                value->begin(),
+//                value->end(),
+//                bytes,
+//                [](const char& character){
+//                    return std::byte(character);
+//                });
     }
 
     bytes_uptr serialize_string_utf32(const_sptr<std::u32string> value) {
-
+        throw "UTF-32 not implemented";
+    }
+    bytes_uptr serialize_string(tdx_string value) {
+        switch (value.encoding) {
+            case tdx_string_encoding::UTF_8:
+                return serialize_string_utf8(value.u8value);
+            case tdx_string_encoding::UTF_16:
+                return serialize_string_utf16(value.u16value);
+            case tdx_string_encoding::UTF_32:
+                return serialize_string_utf32(value.u32value);
+            default: throw "Encoding not implemented";
+        }
     }
 
 //    bytes_uptr serialize_int8();

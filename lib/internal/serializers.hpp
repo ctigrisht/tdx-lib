@@ -8,7 +8,11 @@
 using namespace tdx_values;
 
 namespace internal_serializers {
-    bytes_uptr serialize_string(tdx_string& value);
+    bytes_uptr serialize_string_utf8(const_sptr<std::u8string> value);
+    bytes_uptr serialize_string_utf16(const_sptr<std::u16string> value);
+    bytes_uptr serialize_string_utf32(const_sptr<std::u32string> value);
+
+    bytes_uptr serialize_string(tdx_string value);
 
 //    bytes_uptr serialize_int8();
 //    bytes_uptr serialize_uint8();

@@ -13,10 +13,11 @@ namespace tdx_models
         UTF_32 = 3
     };
 
-    const tdx_string_encoding DEFAULT_STRING_ENCODING = tdx_string_encoding::UTF_8;
+    //const tdx_string_encoding DEFAULT_STRING_ENCODING = tdx_string_encoding::UTF_8;
 
-    std::string get_encoding_name(tdx_string_encoding encoding)
-    {
-        return (std::string)magic_enum::enum_name(encoding);
-    }
+//    std::string get_encoding_name(tdx_string_encoding encoding)
+//    {
+//        return "";
+//        //return (std::string)magic_enum::enum_name(encoding);
+//    }
 }

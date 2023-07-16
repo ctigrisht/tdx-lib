@@ -1,13 +1,15 @@
+#include <memory>
 #include "tdx_values.hpp"
 #include "../../lib/internal/serializers.hpp"
+#include "../string_encoding.hpp"
 
-namespace tdx_values{
+namespace tdx_values {
     bytes_uptr tdx_null::serialize() {
         throw;
     }
 
-    bytes_uptr tdx_string::serialize() {
-        internal_serializers::serialize_string(*this);
+    std::unique_ptr<tdx_value> tdx_null::parse(std::unique_ptr<std::byte[]> value) {
+        throw;
     }
 
     tdx_datetime tdx_datetime::now() {

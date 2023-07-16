@@ -20,33 +20,36 @@ namespace tdx_values {
         tdx_value_type get_type() final { return tdx_value_type::null; }
 
         bytes_uptr serialize() final;
+        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
     };
 
     class tdx_string final : public tdx_value {
     public:
-        tdx_string() {
-            u8value = nullptr;
-            u16value = nullptr;
-            u32value = nullptr;
-        }
+        tdx_string();
 
-        explicit tdx_string(const_sptr<std::u8string> l_value) {
-            u8value = l_value;
-            encoding = tdx_models::tdx_string_encoding::UTF_8;
-            is_null = false;
-        }
+        explicit tdx_string(const_sptr<std::u8string> l_value);
 
-        explicit tdx_string(const_sptr<std::u16string> l_value) {
-            u16value = l_value;
-            encoding = tdx_models::tdx_string_encoding::UTF_16;
-            is_null = false;
-        }
+        explicit tdx_string(const_sptr<std::u16string> l_value);
 
-        explicit tdx_string(const_sptr<std::u32string> l_value) {
-            u32value = l_value;
-            encoding = tdx_models::tdx_string_encoding::UTF_32;
-            is_null = false;
-        }
+        explicit tdx_string(const_sptr<std::u32string> l_value);
+
+//        explicit tdx_string(const_sptr<std::u8string> l_value) {
+//            u8value = l_value;
+//            encoding = tdx_models::tdx_string_encoding::UTF_8;
+//            is_null = false;
+//        }
+//
+//        explicit tdx_string(const_sptr<std::u16string> l_value) {
+//            u16value = l_value;
+//            encoding = tdx_models::tdx_string_encoding::UTF_16;
+//            is_null = false;
+//        }
+//
+//        explicit tdx_string(const_sptr<std::u32string> l_value) {
+//            u32value = l_value;
+//            encoding = tdx_models::tdx_string_encoding::UTF_32;
+//            is_null = false;
+//        }
 
 //        tdx_string(bytes_uptr l_value, tdx_models::tdx_string_encoding l_encoding) {
 //            value = l_value;
@@ -65,6 +68,9 @@ namespace tdx_values {
         tdx_models::tdx_string_encoding encoding;
 
         bytes_uptr serialize() final;
+        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
+
+        ~tdx_string();
     };
 
     class tdx_int16 final : public tdx_value {
@@ -84,6 +90,7 @@ namespace tdx_values {
         std::optional<std::int_fast16_t> value;
 
         bytes_uptr serialize() final;
+        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
     };
 
     class tdx_int32 final : public tdx_value {
@@ -101,6 +108,7 @@ namespace tdx_values {
         std::optional<std::int_fast32_t> value;
 
         bytes_uptr serialize() final;
+        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
     };
 
     class tdx_int64 final : public tdx_value {
@@ -118,6 +126,7 @@ namespace tdx_values {
         std::optional<std::int_fast64_t> value;
 
         bytes_uptr serialize() final;
+        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
     };
 
     class tdx_uint16 final : public tdx_value {
@@ -135,6 +144,7 @@ namespace tdx_values {
         std::optional<std::uint_fast16_t> value;
 
         bytes_uptr serialize() final;
+        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
     };
 
     class tdx_uint32 final : public tdx_value {
@@ -152,6 +162,7 @@ namespace tdx_values {
         std::optional<std::uint_fast32_t> value;
 
         bytes_uptr serialize() final;
+        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
     };
 
     class tdx_uint64 final : public tdx_value {
@@ -169,6 +180,7 @@ namespace tdx_values {
         std::optional<std::uint_fast64_t> value;
 
         bytes_uptr serialize() final;
+        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
     };
 
     class tdx_float32 final : public tdx_value {
@@ -186,6 +198,7 @@ namespace tdx_values {
         std::optional<float> value;
 
         bytes_uptr serialize() final;
+        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
     };
 
     class tdx_float64 final : public tdx_value {
@@ -203,6 +216,7 @@ namespace tdx_values {
         std::optional<double> value;
 
         bytes_uptr serialize() final;
+        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
     };
 
 //    class tdx_decimal final : public tdx_value {
@@ -238,6 +252,7 @@ namespace tdx_values {
 
         tdx_datetime now();
 
+        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
         bytes_uptr serialize() final;
     };
 
@@ -261,6 +276,7 @@ namespace tdx_values {
         tdx_value_type get_type() final { return tdx_value_type::timespan; }
 
         bytes_uptr serialize() final;
+        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
     };
 
     class tdx_blob final : public tdx_value {
@@ -279,6 +295,7 @@ namespace tdx_values {
         bytes_uptr value;
 
         bytes_uptr serialize() final;
+        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
     };
 
     class tdx_blob_ref final : public tdx_value {
@@ -296,6 +313,7 @@ namespace tdx_values {
         std::optional<std::string> value;
 
         bytes_uptr serialize() final;
+        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
     };
 
     class tdx_json final : public tdx_value {
@@ -313,6 +331,7 @@ namespace tdx_values {
         std::optional<nlohmann::json> value;
 
         bytes_uptr serialize() final;
+        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
     };
 
     class tdx_document final : public tdx_value {
@@ -320,5 +339,6 @@ namespace tdx_values {
         std::optional<std::map<std::string, tdx_models::tdx_property>> value = std::nullopt;
 
         bytes_uptr serialize() final;
+        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
     };
 }

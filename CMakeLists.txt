@@ -12,5 +12,16 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/bin)
 
+#if (UNIX)
+#    set(CMAKE_EXE_LINKER_FLAGS "-rdynamic")
+#endif()
+
+file(GLOB_RECURSE MODELS models/*.cpp )
+#models/values/*.hpp
+#file(GLOB INTERNAL lib/internal/*.cpp lib/internal/*.hpp)
+file(GLOB_RECURSE LIB lib/internal/*.cpp )
+#lib/internal/*.hpp
+
 add_library(tdx SHARED main.cpp)
+add_executable(tdxsd main.cpp ${MODELS} ${INTERNAL} ${LIB})
 # add_library(tdx MODULE main.cpp)

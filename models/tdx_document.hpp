@@ -23,14 +23,14 @@ namespace tdx_models{
         ~tdx_document();
     };
     
-    tdx_document::tdx_document(/* args */)
-    {
-
-    }
-    
-    tdx_document::~tdx_document()
-    {
-
-    }
+//    tdx_document::tdx_document(/* args */)
+//    {
+//
+//    }
+//
+//    tdx_document::~tdx_document()
+//    {
+//
+//    }
     
 }
