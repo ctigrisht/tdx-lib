@@ -1,16 +1,53 @@
 #include "serializers.hpp"
 
+#include <bit>
+#include <iostream>
+
 #include "endian_tester.hpp"
+#include "../../models/values/tdx_values.hpp"
 #include "../../models/string_encoding.hpp"
 
 using namespace tdx_internal;
 using namespace tdx_models;
+using namespace tdx_values;
 
 namespace internal_serializers {
-    bytes_uptr serialize_string(tdx_string value){
+    bytes_uptr serialize_string(tdx_string value) {
         switch (value.encoding) {
-//            case tdx_string_encoding::d
+            case tdx_string_encoding::UTF_8: {
+                break;
+            }
+            case tdx_string_encoding::UTF_16: {
+                break;
+            }
+            case tdx_string_encoding::UTF_32: {
+                break;
+            }
+            default: throw "ASCII not implemented";
         }
+    }
+
+    bytes_uptr serialize_string_utf8(const_sptr<std::u8string> value) {
+        int length = value->length();
+
+        std::byte bytes[length];
+        std::transform(
+                value->begin()),
+                value->end(),
+                bytes,
+                [](const char& character){
+                    return std::byte(character);
+                });
+
+        return std::make_unique<std::byte[]>(bytes);
+    }
+
+    bytes_uptr serialize_string_utf16(const_sptr<std::u16string> value) {
+
+    }
+
+    bytes_uptr serialize_string_utf32(const_sptr<std::u32string> value) {
+
     }
 
 //    bytes_uptr serialize_int8();

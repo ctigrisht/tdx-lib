@@ -5,8 +5,11 @@
 #include "json/single_include/nlohmann/json.hpp"
 
 #include "tdx_value.hpp"
+#include "../shared_types.hpp"
 #include "../tdx_property.hpp"
 #include "../string_encoding.hpp"
+
+#include "../../lib/internal/serializers.hpp"
 
 namespace tdx_values {
     class tdx_null final : public tdx_value {
@@ -16,27 +19,30 @@ namespace tdx_values {
         tdx_value_type get_type() final { return tdx_value_type::null; }
 
         bytes_uptr serialize() final {
-            throw;
         }
     };
 
     class tdx_string final : public tdx_value {
     public:
         tdx_string() {
-            value = std::nullopt;
+            u8value = nullptr;
+            u16value = nullptr;
+            u32value = nullptr;
         }
 
-        tdx_string(std::u8string l_value) {
+        tdx_string(const_sptr<std::u8string> l_value) {
             u8value = l_value;
             encoding = tdx_models::tdx_string_encoding::UTF_8;
             is_null = false;
         }
-        tdx_string(std::u16string l_value){
+
+        tdx_string(const_sptr<std::u16string> l_value) {
             u16value = l_value;
             encoding = tdx_models::tdx_string_encoding::UTF_16;
             is_null = false;
         }
-        tdx_string(std::u32string l_value){
+
+        tdx_string(const_sptr<std::u32string> l_value) {
             u32value = l_value;
             encoding = tdx_models::tdx_string_encoding::UTF_32;
             is_null = false;
@@ -52,14 +58,15 @@ namespace tdx_values {
 
         bool is_null = true;
 
-        std::optional <std::u8string> u8value;
-        std::optional <std::u16string> u16value;
-        std::optional <std::u32string> u32value;
+        const_sptr<std::u8string> u8value;
+        const_sptr<std::u16string> u16value;
+        const_sptr<std::u32string> u32value;
 
         tdx_models::tdx_string_encoding encoding;
 
         bytes_uptr serialize() final {
             throw;
+//            return internal_serializers::serialize_string(this);
         }
     };
 

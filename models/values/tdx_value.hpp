@@ -4,8 +4,7 @@
 #include <memory>
 
 #include "magic_enum/magic_enum.hpp"
-
-using bytes_uptr = std::unique_ptr<std::byte[]>;
+#include "../shared_types.hpp"
 
 namespace tdx_values {
     enum struct tdx_value_type : int_fast32_t {
