@@ -6,7 +6,8 @@
 
 
 extern "C" int serialize(){
-    tdx_values::tdx_blob_ref doc = tdx_values::tdx_blob_ref();
+    tdx_values::tdx_string doc = tdx_values::tdx_string(
+            std::make_shared<std::u8string>(u8"hello"));
 
 //    tdx_values::tdx_blob_ref blob;
 

@@ -2,6 +2,7 @@
 
 #include <bit>
 #include <iostream>
+#include <memory>
 
 #include "endian_tester.hpp"
 #include "../../models/values/tdx_values.hpp"
@@ -12,7 +13,7 @@ using namespace tdx_models;
 using namespace tdx_values;
 
 namespace internal_serializers {
-    bytes_uptr serialize_string(tdx_string value) {
+    bytes_uptr serialize_string(tdx_string& value) {
         switch (value.encoding) {
             case tdx_string_encoding::UTF_8: {
                 break;
@@ -43,7 +44,16 @@ namespace internal_serializers {
     }
 
     bytes_uptr serialize_string_utf16(const_sptr<std::u16string> value) {
+        int length = value->length();
 
+        std::byte bytes[length];
+        std::transform(
+                value->begin(),
+                value->end(),
+                bytes,
+                [](const char& character){
+                    return std::byte(character);
+                });
     }
 
     bytes_uptr serialize_string_utf32(const_sptr<std::u32string> value) {
