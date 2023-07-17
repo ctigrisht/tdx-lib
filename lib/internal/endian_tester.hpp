@@ -27,6 +27,8 @@ namespace tdx_internal {
         {
             throw "Machine needs to be LE or BE";
         }
+
+        return system_byte_order::SBO_LITTLE_ENDIAN;
     }
 
 }

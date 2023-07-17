@@ -19,56 +19,38 @@ namespace tdx_values {
 
         tdx_value_type get_type() final { return tdx_value_type::null; }
 
-        bytes_uptr serialize() final;
-        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
+        byte_vector serialize() final;
+        static std::unique_ptr<tdx_value> parse(byte_vector value);
     };
 
     class tdx_string final : public tdx_value {
     public:
         tdx_string();
 
-        explicit tdx_string(const_sptr<std::u8string> l_value);
-
-        explicit tdx_string(const_sptr<std::u16string> l_value);
-
-        explicit tdx_string(const_sptr<std::u32string> l_value);
-
-//        explicit tdx_string(const_sptr<std::u8string> l_value) {
-//            u8value = l_value;
-//            encoding = tdx_models::tdx_string_encoding::UTF_8;
-//            is_null = false;
-//        }
+        explicit tdx_string(const_sptr<std::string> l_value);
+//        explicit tdx_string(const_sptr<std::u8string> l_value);
 //
-//        explicit tdx_string(const_sptr<std::u16string> l_value) {
-//            u16value = l_value;
-//            encoding = tdx_models::tdx_string_encoding::UTF_16;
-//            is_null = false;
-//        }
+//        explicit tdx_string(const_sptr<std::u16string> l_value);
 //
-//        explicit tdx_string(const_sptr<std::u32string> l_value) {
-//            u32value = l_value;
-//            encoding = tdx_models::tdx_string_encoding::UTF_32;
-//            is_null = false;
-//        }
+//        explicit tdx_string(const_sptr<std::u32string> l_value);
 
-//        tdx_string(bytes_uptr l_value, tdx_models::tdx_string_encoding l_encoding) {
-//            value = l_value;
-//            encoding = l_encoding;
-//            is_null = false;
-//        }
 
         tdx_value_type get_type() final { return tdx_value_type::string; }
 
         bool is_null = true;
 
-        const_sptr<std::u8string> u8value;
-        const_sptr<std::u16string> u16value;
-        const_sptr<std::u32string> u32value;
+        const_sptr<std::string> value_u8;
+
+//        const_sptr<std::u8string> u8value;
+//        const_sptr<std::u16string> u16value;
+//        const_sptr<std::u32string> u32value;
 
         tdx_models::tdx_string_encoding encoding;
 
-        bytes_uptr serialize() final;
-        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
+        byte_vector serialize() final;
+        std::string to_string();
+
+        static tdx_string parse(byte_vector value);
 
         ~tdx_string();
     };
@@ -89,8 +71,8 @@ namespace tdx_values {
         bool is_null = true;
         std::optional<std::int_fast16_t> value;
 
-        bytes_uptr serialize() final;
-        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
+        byte_vector serialize() final;
+        static tdx_int16 parse(byte_vector& value);
     };
 
     class tdx_int32 final : public tdx_value {
@@ -107,8 +89,8 @@ namespace tdx_values {
         bool is_null = true;
         std::optional<std::int_fast32_t> value;
 
-        bytes_uptr serialize() final;
-        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
+        byte_vector serialize() final;
+        static std::unique_ptr<tdx_value> parse(byte_vector value);
     };
 
     class tdx_int64 final : public tdx_value {
@@ -125,8 +107,8 @@ namespace tdx_values {
         bool is_null = true;
         std::optional<std::int_fast64_t> value;
 
-        bytes_uptr serialize() final;
-        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
+        byte_vector serialize() final;
+        static std::unique_ptr<tdx_value> parse(byte_vector value);
     };
 
     class tdx_uint16 final : public tdx_value {
@@ -143,8 +125,8 @@ namespace tdx_values {
         bool is_null = true;
         std::optional<std::uint_fast16_t> value;
 
-        bytes_uptr serialize() final;
-        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
+        byte_vector serialize() final;
+        static std::unique_ptr<tdx_value> parse(byte_vector value);
     };
 
     class tdx_uint32 final : public tdx_value {
@@ -161,8 +143,8 @@ namespace tdx_values {
         bool is_null = true;
         std::optional<std::uint_fast32_t> value;
 
-        bytes_uptr serialize() final;
-        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
+        byte_vector serialize() final;
+        static std::unique_ptr<tdx_value> parse(byte_vector value);
     };
 
     class tdx_uint64 final : public tdx_value {
@@ -179,8 +161,8 @@ namespace tdx_values {
         bool is_null = true;
         std::optional<std::uint_fast64_t> value;
 
-        bytes_uptr serialize() final;
-        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
+        byte_vector serialize() final;
+        static std::unique_ptr<tdx_value> parse(byte_vector value);
     };
 
     class tdx_float32 final : public tdx_value {
@@ -197,8 +179,8 @@ namespace tdx_values {
         bool is_null = true;
         std::optional<float> value;
 
-        bytes_uptr serialize() final;
-        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
+        byte_vector serialize() final;
+        static std::unique_ptr<tdx_value> parse(byte_vector value);
     };
 
     class tdx_float64 final : public tdx_value {
@@ -215,8 +197,8 @@ namespace tdx_values {
         bool is_null = true;
         std::optional<double> value;
 
-        bytes_uptr serialize() final;
-        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
+        byte_vector serialize() final;
+        static std::unique_ptr<tdx_value> parse(byte_vector value);
     };
 
 //    class tdx_decimal final : public tdx_value {
@@ -252,8 +234,8 @@ namespace tdx_values {
 
         tdx_datetime now();
 
-        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
-        bytes_uptr serialize() final;
+        static std::unique_ptr<tdx_value> parse(byte_vector value);
+        byte_vector serialize() final;
     };
 
     class tdx_timespan final : public tdx_value {
@@ -275,27 +257,27 @@ namespace tdx_values {
 
         tdx_value_type get_type() final { return tdx_value_type::timespan; }
 
-        bytes_uptr serialize() final;
-        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
+        byte_vector serialize() final;
+        static std::unique_ptr<tdx_value> parse(byte_vector value);
     };
 
     class tdx_blob final : public tdx_value {
     public:
-        tdx_blob() { value = nullptr; }
+        tdx_blob() { value = std::nullopt; }
 
-        explicit tdx_blob(bytes_uptr l_value) {
+        explicit tdx_blob(byte_vector l_value) {
 //            value = std::make_optional<bytes_uptr>(l_value);
             value = std::move(l_value);
-            is_null = value == nullptr;
+            is_null = false;
         }
 
         tdx_value_type get_type() final { return tdx_value_type::blob; }
 
         bool is_null = true;
-        bytes_uptr value;
+        std::optional<byte_vector> value;
 
-        bytes_uptr serialize() final;
-        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
+        byte_vector serialize() final;
+        static std::unique_ptr<tdx_value> parse(byte_vector value);
     };
 
     class tdx_blob_ref final : public tdx_value {
@@ -312,8 +294,8 @@ namespace tdx_values {
         bool is_null = true;
         std::optional<std::string> value;
 
-        bytes_uptr serialize() final;
-        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
+        byte_vector serialize() final;
+        static std::unique_ptr<tdx_value> parse(byte_vector value);
     };
 
     class tdx_json final : public tdx_value {
@@ -330,15 +312,15 @@ namespace tdx_values {
         bool is_null = true;
         std::optional<nlohmann::json> value;
 
-        bytes_uptr serialize() final;
-        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
+        byte_vector serialize() final;
+        static std::unique_ptr<tdx_value> parse(byte_vector value);
     };
 
     class tdx_document final : public tdx_value {
     public:
-        std::optional<std::map<std::string, tdx_models::tdx_property>> value = std::nullopt;
+        std::optional<std::unordered_map<std::string, tdx_models::tdx_property>> value = std::nullopt;
 
-        bytes_uptr serialize() final;
-        std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> value) final;
+        byte_vector serialize() final;
+        static std::unique_ptr<tdx_value> parse(byte_vector value);
     };
 }

@@ -14,8 +14,8 @@ namespace tdx_values {
     public:
         tdx_value() { }
 
-        virtual bytes_uptr serialize() = 0;
-        virtual std::unique_ptr<tdx_value> parse(std::unique_ptr<std::byte[]> data) = 0;
+        virtual byte_vector serialize() = 0;
+        static std::unique_ptr<tdx_value> parse_agnostic(byte_vector data);
 
         virtual tdx_value_type get_type() = 0;
 
