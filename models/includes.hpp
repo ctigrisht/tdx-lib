@@ -1,5 +1,4 @@
-#include "values/tdx_value.hpp"
-#include "values/tdx_values.hpp"
+#include "values/extern_includes.hpp"
 #include "shared_types.hpp"
 #include "string_encoding.hpp"
 

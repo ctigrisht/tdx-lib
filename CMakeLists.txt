@@ -6,6 +6,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_C_STANDARD 23)
 set(CMAKE_CXX_STANDARD 20)
 
+#set(FLAG "-fmodules-ts")
+
 include_directories(${CMAKE_BINARY_DIR}/lib/imports)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/lib)
@@ -17,11 +19,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/bin)
 #endif()
 
 file(GLOB_RECURSE MODELS models/*.cpp )
-#models/values/*.hpp
-#file(GLOB INTERNAL lib/internal/*.cpp lib/internal/*.hpp)
 file(GLOB_RECURSE LIB lib/internal/*.cpp )
-#lib/internal/*.hpp
 
 add_library(tdx SHARED main.cpp)
-add_executable(tdxsd main.cpp ${MODELS} ${INTERNAL} ${LIB})
+add_executable(tdxsd main.cpp ${MODELS} ${LIB})
+add_executable(tdxsd_tests tests.cpp ${MODELS} ${LIB})
 # add_library(tdx MODULE main.cpp)

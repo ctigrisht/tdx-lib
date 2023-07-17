@@ -1,13 +1,13 @@
-#include "tdx_values.hpp"
+#include "tdx_uint16.hpp"
 
 #include <bit>
 
 namespace tdx_values{
-    byte_vector tdx_int16::serialize() {
-        auto type_size = sizeof(std::int_fast16_t);
+    byte_vector tdx_uint16::serialize() {
+        auto type_size = sizeof(std::uint_fast16_t);
         std::byte bytes[type_size];
 
-        std::int_fast16_t value = this->value.value();
+        std::uint_fast16_t value = this->value.value();
         auto byte_data = static_cast<std::byte*>(static_cast<void*>(&value));
         for (int i = 0; i < type_size; ++i) {
             bytes[i] = byte_data[i];
@@ -16,7 +16,7 @@ namespace tdx_values{
         if constexpr (std::endian::native == std::endian::big){
             auto tmp = bytes[0];
             bytes[0] = bytes[1];
-            bytes[1] = bytes[0];
+            bytes[1] = tmp;
         }
 
         auto ret_bytes = byte_vector();
@@ -27,7 +27,7 @@ namespace tdx_values{
         return std::move(ret_bytes);
     }
 
-    tdx_int16 tdx_int16::parse(byte_vector& value) {
+    tdx_uint16 tdx_uint16::parse(byte_vector& value) {
         auto length = value.size();
 
         std::byte buffer[length];
@@ -44,6 +44,6 @@ namespace tdx_values{
         std::int_fast16_t cast_value;
         memcpy( &cast_value, buffer, sizeof( std::int_fast16_t ) );
 
-        return tdx_int16(cast_value);
+        return tdx_uint16(cast_value);
     }
 }
