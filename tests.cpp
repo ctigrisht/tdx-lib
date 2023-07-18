@@ -20,6 +20,122 @@ int main() {
     return 0;
 }
 
+void test_float32() {
+    auto test_name = "TESTS: tdx_float32";
+    TEST_RESULTS[test_name] = {};
+    std::cout << std::endl << test_name << std::endl;
+
+    std::vector<float> tests{
+            0,
+            329048.03342,
+            98458449.92382,
+    };
+
+    for (float test_value : tests) {
+        tdx_values::tdx_float32 tdx_val(test_value);
+
+        auto bytes = tdx_val.serialize();
+        auto parsed = tdx_values::tdx_float32::parse(bytes);
+
+        auto passed = parsed.value.value() == test_value;
+        std::cout
+                << "Test '" << test_value << "' "
+                << (passed ? "passed" : "failed")
+                << std::endl;
+
+        if (passed)
+            TEST_RESULTS[test_name].passed++;
+        else TEST_RESULTS[test_name].failed++;
+    }
+}
+
+void test_uint64() {
+    auto test_name = "TESTS: tdx_uint64";
+    TEST_RESULTS[test_name] = {};
+    std::cout << std::endl << test_name << std::endl;
+
+    std::vector<std::uint_fast64_t> tests{
+            0,
+            32904892389849328,
+            98458449,
+    };
+
+    for (std::uint_fast64_t test_value: tests) {
+        tdx_values::tdx_uint64 tdx_val(test_value);
+
+        auto bytes = tdx_val.serialize();
+        auto parsed = tdx_values::tdx_uint64::parse(bytes);
+
+        auto passed = parsed.value.value() == test_value;
+        std::cout
+                << "Test '" << test_value << "' "
+                << (passed ? "passed" : "failed")
+                << std::endl;
+
+        if (passed)
+            TEST_RESULTS[test_name].passed++;
+        else TEST_RESULTS[test_name].failed++;
+    }
+}
+
+void test_int64() {
+    auto test_name = "TESTS: tdx_int64";
+    TEST_RESULTS[test_name] = {};
+    std::cout << std::endl << test_name << std::endl;
+
+    std::vector<std::int_fast64_t> tests{
+            0,
+            32904892389849328,
+            98458449,
+    };
+
+    for (std::int_fast64_t test_value: tests) {
+        tdx_values::tdx_int64 tdx_val(test_value);
+
+        auto bytes = tdx_val.serialize();
+        auto parsed = tdx_values::tdx_int64::parse(bytes);
+
+        auto passed = parsed.value.value() == test_value;
+        std::cout
+                << "Test '" << test_value << "' "
+                << (passed ? "passed" : "failed")
+                << std::endl;
+
+        if (passed)
+            TEST_RESULTS[test_name].passed++;
+        else TEST_RESULTS[test_name].failed++;
+    }
+}
+
+void test_uint32() {
+    auto test_name = "TESTS: tdx_uint32";
+    TEST_RESULTS[test_name] = {};
+    std::cout << std::endl << test_name << std::endl;
+
+    std::vector<std::uint_fast32_t> tests{
+            0,
+            3290489238,
+            98458449,
+    };
+
+    for (std::uint_fast32_t test_value: tests) {
+        tdx_values::tdx_uint32 tdx_val(test_value);
+
+        auto bytes = tdx_val.serialize();
+        auto parsed = tdx_values::tdx_uint32::parse(bytes);
+
+        auto passed = parsed.value.value() == test_value;
+        std::cout
+                << "Test '" << test_value << "' "
+                << (passed ? "passed" : "failed")
+                << std::endl;
+
+        if (passed)
+            TEST_RESULTS[test_name].passed++;
+        else TEST_RESULTS[test_name].failed++;
+    }
+}
+
 void test_int32() {
     auto test_name = "TESTS: tdx_int32";
     TEST_RESULTS[test_name] = {};
@@ -137,8 +253,12 @@ void test_string() {
 void run_tests() {
     test_uint16();
     test_int16();
+    test_uint32();
     test_int32();
+    test_int64();
+    test_uint64();
     test_string();
+    test_float32();
 
     int passed = 0;
     int failed = 0;

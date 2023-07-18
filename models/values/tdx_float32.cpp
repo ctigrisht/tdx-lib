@@ -1,11 +1,11 @@
-#include "tdx_int32.hpp"
+#include "tdx_float32.hpp"
 
 namespace tdx_values{
-    byte_vector tdx_int32::serialize() {
-        auto type_size = sizeof(std::int_fast32_t);
+    byte_vector tdx_float32::serialize() {
+        auto type_size = sizeof(float);
         std::byte buffer[type_size];
 
-        std::int_fast32_t l_value = this->value.value();
+        float l_value = value.value();
         auto byte_data = static_cast<std::byte*>(static_cast<void*>(&value));
         for (int i = 0; i < type_size; ++i) {
             buffer[i] = byte_data[i];
@@ -30,9 +30,9 @@ namespace tdx_values{
         return std::move(ret_bytes);
     }
 
-    tdx_int32 tdx_int32::parse(byte_vector& value){
+    tdx_float32 tdx_float32::parse(byte_vector &value) {
         auto length = value.size();
-        const auto type_size = sizeof( std::int_fast32_t );
+        const auto type_size = sizeof( float );
 
         if (length > type_size)
             throw std::exception();
@@ -53,9 +53,9 @@ namespace tdx_values{
             }
         }
 
-        std::int_fast32_t cast_value;
+        float cast_value;
         memcpy( &cast_value, buffer, type_size);
 
-        return tdx_int32(cast_value);
+        return tdx_float32(cast_value);
     }
 }
