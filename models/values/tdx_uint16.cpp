@@ -10,8 +10,8 @@ namespace tdx_values{
         auto type_size = sizeof(std::uint_fast16_t);
         std::byte bytes[type_size];
 
-        std::uint_fast16_t value = this->value.value();
-        auto byte_data = static_cast<std::byte*>(static_cast<void*>(&value));
+        std::uint_fast16_t l_value = this->value.value();
+        auto byte_data = static_cast<std::byte*>(static_cast<void*>(&l_value));
         for (int i = 0; i < type_size; ++i) {
             bytes[i] = byte_data[i];
         }
@@ -45,7 +45,7 @@ namespace tdx_values{
         }
 
         std::int_fast16_t cast_value;
-        memcpy( &cast_value, buffer, sizeof( std::int_fast16_t ) );
+        memcpy( &cast_value, buffer, sizeof( std::uint_fast16_t ) );
 
         return tdx_uint16(cast_value);
     }

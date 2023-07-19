@@ -68,7 +68,7 @@ namespace tdx_values {
 
         std::string final_string(characters, length);
 
-        return tdx_string(std::string(final_string));
+        return tdx_string(final_string);
     }
 
     const std::optional<std::string> &tdx_string::to_string() const {

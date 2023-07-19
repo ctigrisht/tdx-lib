@@ -9,7 +9,7 @@ namespace tdx_values{
         std::byte buffer[type_size];
 
         std::uint_fast64_t l_value = value.value();
-        auto byte_data = static_cast<std::byte*>(static_cast<void*>(&value));
+        auto byte_data = static_cast<std::byte*>(static_cast<void*>(&l_value));
         for (int i = 0; i < type_size; ++i) {
             buffer[i] = byte_data[i];
         }
