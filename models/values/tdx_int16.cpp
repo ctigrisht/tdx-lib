@@ -5,6 +5,9 @@
 
 namespace tdx_values{
     byte_vector tdx_int16::serialize() {
+        if (!value.has_value())
+            return {};
+
         auto type_size = sizeof(std::int_fast16_t);
         std::byte bytes[type_size];
 

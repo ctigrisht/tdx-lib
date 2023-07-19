@@ -12,3 +12,4 @@
 #include "tdx_int64.hpp"
 #include "tdx_uint64.hpp"
 #include "tdx_float32.hpp"
+#include "tdx_float64.hpp"

@@ -1,14 +1,14 @@
-#include "tdx_int64.hpp"
+#include "tdx_float64.hpp"
 
 namespace tdx_values{
-    byte_vector tdx_int64::serialize() {
+    byte_vector tdx_float64::serialize() {
         if (!value.has_value())
             return {};
 
-        auto type_size = sizeof(std::int_fast64_t);
+        auto type_size = sizeof(double);
         std::byte buffer[type_size];
 
-        std::int_fast64_t l_value = value.value();
+        double l_value = value.value();
         auto byte_data = static_cast<std::byte*>(static_cast<void*>(&value));
         for (int i = 0; i < type_size; ++i) {
             buffer[i] = byte_data[i];
@@ -33,9 +33,10 @@ namespace tdx_values{
         return std::move(ret_bytes);
     }
 
-    tdx_int64 tdx_int64::parse(byte_vector &value) {
+    tdx_float64 tdx_float64::parse(byte_vector &value) {
+
         auto length = value.size();
-        const auto type_size = sizeof( std::int_fast64_t );
+        const auto type_size = sizeof( double );
 
         if (length > type_size)
             throw std::exception();
@@ -56,9 +57,9 @@ namespace tdx_values{
             }
         }
 
-        std::int_fast64_t cast_value;
+        double cast_value;
         memcpy( &cast_value, buffer, type_size);
 
-        return tdx_int64(cast_value);
+        return tdx_float64(cast_value);
     }
 }

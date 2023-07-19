@@ -41,6 +41,9 @@ namespace tdx_values {
 //    }
 
     byte_vector tdx_string::serialize() {
+        if (!value_u8.has_value())
+            return {};
+
         switch (this->encoding) {
             case tdx_string_encoding::UTF_8:{
                 if (this->value_u8.has_value())

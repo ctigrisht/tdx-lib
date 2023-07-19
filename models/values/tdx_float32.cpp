@@ -2,6 +2,9 @@
 
 namespace tdx_values{
     byte_vector tdx_float32::serialize() {
+        if (!value.has_value())
+            return {};
+
         auto type_size = sizeof(float);
         std::byte buffer[type_size];
 
