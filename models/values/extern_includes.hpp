@@ -14,3 +14,5 @@
 #include "tdx_float32.hpp"
 #include "tdx_float64.hpp"
 #include "tdx_datetime.hpp"
+#include "tdx_timespan.hpp"
+#include "tdx_blob.hpp"

@@ -8,6 +8,7 @@
 //};
 
 using byte_vector = std::vector<std::byte>;
+using stdbyte = std::byte;
 //using bytes_uptr = std::unique_ptr<dynamic_byte_array>;
 template <typename T> using sptr = std::shared_ptr<T>;
 template <typename T> using const_sptr = std::shared_ptr<const T>;

@@ -19,6 +19,8 @@ namespace tdx_values {
 
         tdx_value_type get_type() final { return tdx_value_type::null; }
 
+        std::uint_least32_t padding_size = 0;
+
         byte_vector serialize() final;
         static std::unique_ptr<tdx_value> parse(byte_vector value);
     };
@@ -34,48 +36,6 @@ namespace tdx_values {
 //            throw;
 //        }
 //    };
-
-    class tdx_timespan final : public tdx_value {
-        tdx_timespan() {
-
-        }
-
-//        explicit tdx_timespan(std::chrono::duration<std::chrono::milliseconds> l_value) {
-//            is_null = false;
-//        }
-
-        explicit tdx_timespan(std::int_fast64_t l_value) {
-            is_null = false;
-            value = l_value;
-        }
-
-        bool is_null = true;
-        std::optional<std::int_fast64_t> value;
-
-        tdx_value_type get_type() final { return tdx_value_type::timespan; }
-
-        byte_vector serialize() final;
-        static std::unique_ptr<tdx_value> parse(byte_vector value);
-    };
-
-    class tdx_blob final : public tdx_value {
-    public:
-        tdx_blob() { value = std::nullopt; }
-
-        explicit tdx_blob(byte_vector l_value) {
-//            value = std::make_optional<bytes_uptr>(l_value);
-            value = std::move(l_value);
-            is_null = false;
-        }
-
-        tdx_value_type get_type() final { return tdx_value_type::blob; }
-
-        bool is_null = true;
-        std::optional<byte_vector> value;
-
-        byte_vector serialize() final;
-        static std::unique_ptr<tdx_value> parse(byte_vector value);
-    };
 
     class tdx_blob_ref final : public tdx_value {
     public:
@@ -122,6 +82,8 @@ namespace tdx_values {
 
         std::optional<std::unordered_map<std::string, tdx_models::tdx_property>> value = std::nullopt;
         bool is_free = true;
+
+        tdx_value_type get_type() final { return tdx_value_type::document; }
 
         byte_vector serialize() final;
         static std::unique_ptr<tdx_value> parse(byte_vector value);

@@ -20,7 +20,70 @@ int main() {
     return 0;
 }
 
-void test_datetime(){
+void test_blob() {
+    auto test_name = "TESTS: tdx_blob";
+    TEST_RESULTS[test_name] = {};
+    std::cout << std::endl << test_name << std::endl;
+
+    auto blob1 = byte_vector{stdbyte(1), stdbyte(1), stdbyte(1)};
+    auto blob2 = byte_vector{stdbyte(156), stdbyte(132), stdbyte(242), stdbyte(156), stdbyte(132), stdbyte(242)};
+
+    auto tdx1 = tdx_values::tdx_blob{blob1};
+    auto tdx2 = tdx_values::tdx_blob{blob2};
+    std::vector<tdx_values::tdx_blob> tests{
+        tdx1, tdx2
+    };
+
+    for (auto test_value : tests) {
+        auto bytes = test_value.serialize();
+
+        auto parsed = tdx_values::tdx_blob::parse(bytes);
+
+        auto passed = parsed.value.value() == test_value.value.value();
+        std::cout
+                << "Test '" << test_value.value.value().size() << "' sized byte array "
+                << (passed ? "passed" : "failed")
+                << std::endl;
+
+        if (passed)
+            TEST_RESULTS[test_name].passed++;
+        else TEST_RESULTS[test_name].failed++;
+    }
+}
+
+void test_timespan() {
+    auto test_name = "TESTS: tdx_timespan";
+    TEST_RESULTS[test_name] = {};
+    std::cout << std::endl << test_name << std::endl;
+
+    std::vector<tdx_values::tdx_timespan> tests{
+            tdx_values::tdx_timespan{0},
+            tdx_values::tdx_timespan{250},
+            tdx_values::tdx_timespan{3209432},
+    };
+
+    for (auto test_value: tests) {
+        auto bytes = test_value.serialize();
+
+        std::array<stdbyte, sizeof(int64_t)> barr = {};
+        for (int i = 0; i < sizeof(int64_t); ++i)
+            barr[i] = bytes[i];
+
+        auto parsed = tdx_values::tdx_timespan::parse(barr);
+
+        auto passed = parsed.value.value() == test_value.value.value();
+        std::cout
+                << "Test '" << test_value.value.value() << "' "
+                << (passed ? "passed" : "failed")
+                << std::endl;
+
+        if (passed)
+            TEST_RESULTS[test_name].passed++;
+        else TEST_RESULTS[test_name].failed++;
+    }
+}
+
+void test_datetime() {
     auto test_name = "TESTS: tdx_datetime";
     TEST_RESULTS[test_name] = {};
     std::cout << std::endl << test_name << std::endl;
@@ -29,12 +92,12 @@ void test_datetime(){
             tdx_values::tdx_datetime{0},
             tdx_values::tdx_datetime{3492039},
             tdx_values::tdx_datetime{std::chrono::system_clock::now()},
-            tdx_values::tdx_datetime{39402394328, std::string ("utc")},
-            tdx_values::tdx_datetime{324329482938, std::string ("GMT+5")},
+            tdx_values::tdx_datetime{39402394328, std::string("utc")},
+            tdx_values::tdx_datetime{324329482938, std::string("GMT+5")},
             tdx_values::tdx_datetime{std::chrono::system_clock::now(), std::string("GMT+8")},
     };
 
-    for (auto test_value : tests){
+    for (auto test_value: tests) {
 
         auto bytes = test_value.serialize();
         auto parsed = tdx_values::tdx_datetime::parse(bytes);
@@ -63,7 +126,7 @@ void test_float64() {
             -342
     };
 
-    for (double test_value : tests) {
+    for (double test_value: tests) {
         tdx_values::tdx_float64 tdx_val(test_value);
 
         auto bytes = tdx_val.serialize();
@@ -94,7 +157,7 @@ void test_float32() {
             -342
     };
 
-    for (float test_value : tests) {
+    for (float test_value: tests) {
         tdx_values::tdx_float32 tdx_val(test_value);
 
         auto bytes = tdx_val.serialize();
@@ -324,7 +387,8 @@ void run_tests() {
     test_float32();
     test_float64();
     test_datetime();
-
+    test_timespan();
+    test_blob();
 
     int passed = 0;
     int failed = 0;
@@ -333,5 +397,6 @@ void run_tests() {
         failed += result.second.failed;
     }
 
-    std::cout << std::endl << "Tests: " << passed + failed << ", Passed: " << passed << ", Failed: " << failed << std::endl;
+    std::cout << std::endl << "Tests: " << passed + failed << ", Passed: " << passed << ", Failed: " << failed
+              << std::endl;
 }

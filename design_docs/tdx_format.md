@@ -289,6 +289,34 @@ PROP: "Property inside a document"
 }
 ```
 
+```
+#MODULE "QUERY_FILTER"
+
+(BYTE_ARR[2] 0, 5)
+(UINT_16 [BRANCH COUNT])
+(each [BRANCH]){
+    (BYTE [BRANCH TYPE])
+    (module "{type}_BRANCH")
+}
+```
+
+```
+#MODULE "AND_BRANCH"
+
+(BYTE [BRANCH COUNT])
+(each [BRANCH]) {
+    (module "{type}_BRANCH")
+}
+
+```
+
+```
+#MODULE "OR_BRANCH"
+
+
+```
+
+
 
 ### Data types byte maps
 

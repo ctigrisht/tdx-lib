@@ -5,6 +5,10 @@
 
 namespace tdx_values{
     byte_vector tdx_int16::serialize() {
+// TODO use this to get bytes
+//        dest[0] = static_cast<std::byte>(value >> 0);
+//        dest[1] = static_cast<std::byte>(value >> 8);
+
         if (!value.has_value())
             return {};
 

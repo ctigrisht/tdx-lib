@@ -16,6 +16,9 @@
 
 
 int main() {
+
+    std::cout << sizeof (std::uint_least16_t) << std::endl;
+
     return 0;
 }
 
