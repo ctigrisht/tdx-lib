@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <vector>
 #include <string>
+#include <variant>
 
 #include "values/tdx_value.hpp"
 #include "tdx_property.hpp"
@@ -15,12 +16,14 @@ namespace tdx_models{
     private:
         /* data */
     public:
+        std::optional<std::uint16_t> schema_id = std::nullopt; // if null, then a free document
+
         std::string header;
         std::unordered_map<std::string, tdx_property> values;
         std::vector<tdx_link> links;
 
-        tdx_document(/* args */);
-        ~tdx_document();
+        std::variant<byte_vector, std::string> serialize();
+        static std::variant<tdx_document, std::string> parse(byte_vector& bytes);
     };
     
 //    tdx_document::tdx_document(/* args */)
