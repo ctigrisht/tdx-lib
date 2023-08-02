@@ -1,11 +1,20 @@
 #include "values_cpp_includes.hpp"
 
-namespace tdx_values{
+#include "tdx_null.hpp"
+
+namespace tdx_values {
     byte_vector tdx_null::serialize() {
-        throw;
+        auto ret_vec = byte_vector{};
+        ret_vec.resize(2 + padding_size);
+        ret_vec[0] = NULL_FLAG[0];
+        ret_vec[1] = NULL_FLAG[1];
+
+        return std::move(ret_vec);
     }
 
-    std::unique_ptr<tdx_value> tdx_null::parse(byte_vector value) {
-        throw;
+    tdx_null tdx_null::parse(byte_vector &value) {
+        auto val = tdx_null();
+        val.padding_size = value.size() - 2;
+        return val;
     }
 }

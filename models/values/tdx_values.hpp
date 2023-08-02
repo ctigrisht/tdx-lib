@@ -13,17 +13,7 @@
 #include "tdx_type.hpp"
 
 namespace tdx_values {
-    class tdx_null final : public tdx_value {
-    public:
-        tdx_null() {}
 
-        tdx_value_type get_type() final { return tdx_value_type::null; }
-
-        std::uint_least32_t padding_size = 0;
-
-        byte_vector serialize() final;
-        static std::unique_ptr<tdx_value> parse(byte_vector value);
-    };
 
 //    class tdx_decimal final : public tdx_value {
 //    public:
@@ -86,6 +76,6 @@ namespace tdx_values {
         tdx_value_type get_type() final { return tdx_value_type::document; }
 
         byte_vector serialize() final;
-        static std::unique_ptr<tdx_value> parse(byte_vector value);
+        static tdx_document parse(byte_vector value);
     };
 }

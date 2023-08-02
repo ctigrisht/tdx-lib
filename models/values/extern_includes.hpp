@@ -4,6 +4,7 @@
 #include "tdx_values.hpp"
 #include "tdx_type.hpp"
 
+#include "tdx_null.hpp"
 #include "tdx_string.hpp"
 #include "tdx_int16.hpp"
 #include "tdx_uint16.hpp"
