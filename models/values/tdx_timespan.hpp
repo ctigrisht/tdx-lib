@@ -24,7 +24,7 @@ namespace tdx_values{
 
         tdx_value_type get_type() final { return tdx_value_type::timespan; }
 
-        byte_vector serialize() final;
+        tdx_result serialize() final;
         static tdx_timespan parse(std::array<stdbyte, sizeof (std::int64_t)>& value);
     };
 

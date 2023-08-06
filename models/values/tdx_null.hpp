@@ -16,7 +16,7 @@ namespace tdx_values {
 
         std::uint_least32_t padding_size;
 
-        byte_vector serialize() final;
+        tdx_result serialize() final;
         static tdx_null parse(byte_vector& value);
     };
 }

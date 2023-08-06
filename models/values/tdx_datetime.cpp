@@ -18,7 +18,7 @@ namespace tdx_values {
 
     std::string parse_time_zone_code(byte_vector &bytes, std::uint_fast16_t tz_size);
 
-    byte_vector tdx_datetime::serialize() {
+    tdx_result tdx_datetime::serialize() {
         if (!value.has_value())
             return {};
 

@@ -25,7 +25,7 @@ namespace tdx_values{
 
         tdx_models::tdx_string_encoding encoding;
 
-        byte_vector serialize() final;
+        tdx_result serialize() final;
         [[nodiscard]]
         const std::optional<std::string>& to_string() const;
 

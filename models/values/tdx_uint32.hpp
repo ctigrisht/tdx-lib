@@ -17,7 +17,7 @@ namespace tdx_values{
         bool is_null = true;
         std::optional<std::uint_fast32_t> value;
 
-        byte_vector serialize() final;
+        tdx_result serialize() final;
         static tdx_uint32 parse(byte_vector& value);
     };
 

@@ -3,7 +3,7 @@
 #include <bit>
 
 namespace tdx_values{
-    byte_vector tdx_uint16::serialize() {
+    tdx_result tdx_uint16::serialize() {
         if (!value.has_value())
             return {};
 

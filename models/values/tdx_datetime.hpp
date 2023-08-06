@@ -43,7 +43,7 @@ namespace tdx_values{
         std::optional<std::string> time_zone = DEFAULT_TIME_ZONE_CODE;
 
 
-        byte_vector serialize() final;
+        tdx_result serialize() final;
         static tdx_datetime parse(byte_vector& value);
         static tdx_datetime now();
     };

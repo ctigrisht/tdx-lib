@@ -1,7 +1,7 @@
 #include "tdx_uint64.hpp"
 
 namespace tdx_values{
-    byte_vector tdx_uint64::serialize() {
+    tdx_result tdx_uint64::serialize() {
         if (!value.has_value())
             return {};
 

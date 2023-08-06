@@ -4,6 +4,7 @@
 #include <memory>
 #include <iostream>
 
+#include "values_cpp_includes.hpp"
 #include "magic_enum/magic_enum.hpp"
 #include "../shared_types.hpp"
 #include "tdx_type.hpp"
@@ -12,10 +13,11 @@ namespace tdx_values {
     class tdx_value {
     private:
     public:
-        tdx_value() { }
+        tdx_value() = default;
 
-        virtual byte_vector serialize() = 0;
-        static std::unique_ptr<tdx_value> parse_agnostic(byte_vector data);
+        virtual tdx_result serialize() = 0; // returns result or error code
+
+        //static std::unique_ptr<tdx_value> parse_agnostic(byte_vector data);
 
         virtual tdx_value_type get_type() = 0;
 
