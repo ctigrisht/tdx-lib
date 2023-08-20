@@ -3,7 +3,7 @@
 #include "tdx_null.hpp"
 
 namespace tdx_values {
-    tdx_result tdx_null::serialize() {
+    tdx_bytes_result tdx_null::serialize() {
         auto ret_vec = byte_vector{};
         ret_vec.resize(2 + padding_size);
         ret_vec[0] = NULL_FLAG[0];

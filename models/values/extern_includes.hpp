@@ -17,3 +17,6 @@
 #include "tdx_datetime.hpp"
 #include "tdx_timespan.hpp"
 #include "tdx_blob.hpp"
+#include "tdx_blob_ref.hpp"
+#include "tdx_json.hpp"
+#include "tdx_document.hpp"

@@ -1,9 +1,9 @@
 #include "tdx_float32.hpp"
 
 namespace tdx_values{
-    tdx_result tdx_float32::serialize() {
+    tdx_bytes_result tdx_float32::serialize() {
         if (!value.has_value())
-            return {};
+            return (false);
 
         auto type_size = sizeof(float);
         std::byte buffer[type_size];

@@ -29,7 +29,7 @@ namespace tdx_values{
         std::optional<byte_vector> value = std::nullopt;
 
 
-        tdx_result serialize() final;
+        tdx_bytes_result serialize() final;
         static tdx_blob parse(byte_vector& value);
         static tdx_blob from_copy(byte_vector l_value);
     };

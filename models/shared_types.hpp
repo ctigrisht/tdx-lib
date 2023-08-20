@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <memory>
 
 //struct dynamic_byte_array{
 //    int length = 0;

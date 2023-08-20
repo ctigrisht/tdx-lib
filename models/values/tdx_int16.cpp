@@ -4,7 +4,7 @@
 #include <bit>
 
 namespace tdx_values{
-    tdx_result tdx_int16::serialize() {
+    tdx_bytes_result tdx_int16::serialize() {
 // TODO use this to get bytes
 //        dest[0] = static_cast<std::byte>(value >> 0);
 //        dest[1] = static_cast<std::byte>(value >> 8);

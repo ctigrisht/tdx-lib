@@ -1,7 +1,7 @@
 #include "tdx_int64.hpp"
 
 namespace tdx_values{
-    tdx_result tdx_int64::serialize() {
+    tdx_bytes_result tdx_int64::serialize() {
         if (!value.has_value())
             return {};
 

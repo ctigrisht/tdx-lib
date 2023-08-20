@@ -12,7 +12,7 @@ namespace tdx_values {
         return std::move(tdx_val);
     }
 
-    tdx_result tdx_blob::serialize() {
+    tdx_bytes_result tdx_blob::serialize() {
         if (value->data() == nullptr)
             return {};
 

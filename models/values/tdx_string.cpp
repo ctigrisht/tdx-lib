@@ -40,7 +40,7 @@ namespace tdx_values {
 //        is_null = false;
 //    }
 
-    tdx_result tdx_string::serialize() {
+    tdx_bytes_result tdx_string::serialize() {
         if (!value_u8.has_value())
             return {};
 

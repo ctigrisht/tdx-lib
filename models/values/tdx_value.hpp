@@ -4,10 +4,11 @@
 #include <memory>
 #include <iostream>
 
-#include "values_cpp_includes.hpp"
+//#include "values_cpp_includes.hpp"
 #include "magic_enum/magic_enum.hpp"
 #include "../shared_types.hpp"
 #include "tdx_type.hpp"
+#include "typedefs.hpp"
 
 namespace tdx_values {
     class tdx_value {
@@ -15,7 +16,7 @@ namespace tdx_values {
     public:
         tdx_value() = default;
 
-        virtual tdx_result serialize() = 0; // returns result or error code
+        virtual tdx_bytes_result serialize() = 0; // returns result or error code
 
         //static std::unique_ptr<tdx_value> parse_agnostic(byte_vector data);
 

@@ -1,7 +1,7 @@
 #include "tdx_timespan.hpp"
 
 namespace tdx_values{
-    tdx_result tdx_timespan::serialize() {
+    tdx_bytes_result tdx_timespan::serialize() {
         if (!value.has_value())
             return {};
 
