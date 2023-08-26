@@ -10,7 +10,7 @@ namespace tdx_values{
 //        dest[1] = static_cast<std::byte>(value >> 8);
 
         if (!value.has_value())
-            return {};
+            return (false);
 
         auto type_size = sizeof(std::int_fast16_t);
         std::byte bytes[type_size];

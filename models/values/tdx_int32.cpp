@@ -3,7 +3,7 @@
 namespace tdx_values{
     tdx_bytes_result tdx_int32::serialize() {
         if (!value.has_value())
-            return {};
+            return (false);
 
         auto type_size = sizeof(std::int_fast32_t);
         std::byte buffer[type_size];

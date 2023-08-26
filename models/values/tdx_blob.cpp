@@ -14,7 +14,7 @@ namespace tdx_values {
 
     tdx_bytes_result tdx_blob::serialize() {
         if (value->data() == nullptr)
-            return {};
+            return (false);
 
         std::uint32_t data_size = value->size();
         auto size_bytes = serialize_uint32(data_size);
@@ -44,7 +44,7 @@ namespace tdx_values {
         std::array<stdbyte, 4> buffer{};
 
         if (std::endian::native == std::endian::big)
-            throw "LE only";
+            throw "LE only"; // TODO make BE converter
 
         buffer[0] = static_cast<stdbyte>(value >> 0);
         buffer[1] = static_cast<stdbyte>(value >> 8);

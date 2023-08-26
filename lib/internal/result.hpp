@@ -33,15 +33,15 @@ namespace vr {
         }
 
         TValue move_value(){
-            return std::move(std::get(_data));
+            return std::move(std::get<TValue>(_data));
         }
 
         TValue& get_value() {
-            return std::get(_data);
+            return std::get<TValue>(_data);
         }
 
         TError& get_error() {
-            return std::get(_data);
+            return std::get<TValue>(_data);
         }
     };
 

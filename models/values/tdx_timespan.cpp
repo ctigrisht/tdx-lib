@@ -3,7 +3,7 @@
 namespace tdx_values{
     tdx_bytes_result tdx_timespan::serialize() {
         if (!value.has_value())
-            return {};
+            return (false);
 
         auto type_size = sizeof(std::int64_t);
         std::array<stdbyte, sizeof (std::int64_t)> buffer{};

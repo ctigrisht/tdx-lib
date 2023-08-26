@@ -3,7 +3,7 @@
 namespace tdx_values{
     tdx_bytes_result tdx_float64::serialize() {
         if (!value.has_value())
-            return {};
+            return (false);
 
         auto type_size = sizeof(double);
         std::byte buffer[type_size];

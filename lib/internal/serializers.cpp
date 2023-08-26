@@ -16,7 +16,7 @@ using namespace tdx_values;
 
 namespace internal_serializers {
     byte_vector serialize_string_utf8(std::string& value) {
-        uint length = value.length();
+        auto length = value.length();
 
         std::byte tmp_bytes[length];
         std::transform(

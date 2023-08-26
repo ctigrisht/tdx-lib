@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <array>
+#include <chrono>
 
 namespace tdx_values {
 
@@ -20,7 +21,7 @@ namespace tdx_values {
 
     tdx_bytes_result tdx_datetime::serialize() {
         if (!value.has_value())
-            return {};
+            return (false);
 
         byte_vector final_bytes = {};
 
@@ -79,7 +80,7 @@ namespace tdx_values {
 
     byte_vector serialize_time_zone(const std::string &value) {
 
-        uint length = value.length();
+        auto length = value.length();
 
         std::byte tmp_bytes[length];
         std::transform(

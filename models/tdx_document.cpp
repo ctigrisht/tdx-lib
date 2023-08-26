@@ -6,9 +6,9 @@ namespace tdx_models {
             std::byte(0),
             std::byte(5),
         };
+
+        throw;
 //        ret_bytes.reserve(2);
-
-
     }
 
     std::variant<tdx_document, std::string> tdx_document::parse(byte_vector &bytes) {

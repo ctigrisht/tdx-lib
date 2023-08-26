@@ -1,6 +1,7 @@
 #pragma once
 
 #include "values_cpp_includes.hpp"
+#include <chrono>
 
 namespace tdx_values{
     static const std::string DEFAULT_TIME_ZONE_CODE = "utc";

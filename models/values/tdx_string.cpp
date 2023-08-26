@@ -42,13 +42,13 @@ namespace tdx_values {
 
     tdx_bytes_result tdx_string::serialize() {
         if (!value_u8.has_value())
-            return {};
+            return (false);
 
         switch (this->encoding) {
             case tdx_string_encoding::UTF_8:{
                 if (this->value_u8.has_value())
                     return serialize_string_utf8(this->value_u8.value());
-                return {};
+                return (false);
             }
             case tdx_string_encoding::UTF_16:
                 throw;
@@ -83,7 +83,7 @@ namespace tdx_values {
     }
 
     byte_vector serialize_string_utf8(std::string& value) {
-        uint length = value.length();
+        auto length = value.length();
 
         std::byte tmp_bytes[length];
         std::transform(
