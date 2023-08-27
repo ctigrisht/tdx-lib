@@ -13,6 +13,7 @@
 #include "test_int32.hpp"
 #include "test_int64.hpp"
 #include "test_string.hpp"
+#include "test_boolean.hpp"
 #include "test_timespan.hpp"
 #include "test_uint16.hpp"
 #include "test_uint32.hpp"
@@ -27,6 +28,8 @@ int main() {
 }
 
 void run_tests() {
+    test_string();
+    test_boolean();
     test_blob();
     test_datetime();
     test_float32();
@@ -34,7 +37,6 @@ void run_tests() {
     test_int16();
     test_int32();
     test_int64();
-    test_string();
     test_timespan();
     test_uint16();
     test_uint32();

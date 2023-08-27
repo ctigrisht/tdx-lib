@@ -6,6 +6,7 @@
 
 #include "tdx_null.hpp"
 #include "tdx_string.hpp"
+#include "tdx_boolean.hpp"
 #include "tdx_int16.hpp"
 #include "tdx_uint16.hpp"
 #include "tdx_int32.hpp"

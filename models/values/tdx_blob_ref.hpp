@@ -15,6 +15,7 @@ namespace tdx_values{
         tdx_value_type get_type() final { return tdx_value_type::blob_ref; }
 
         bool is_null = true;
+//        std::optional<
         std::optional<std::string> value;
 
         tdx_bytes_result serialize() final;

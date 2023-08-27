@@ -10,6 +10,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 include_directories(${CMAKE_BINARY_DIR}/lib/imports)
 include_directories(./lib/imports)
+include_directories(./lib/internal)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/lib)

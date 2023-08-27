@@ -11,6 +11,7 @@ It is the primary data storage format for `vrdb-cpp`, a noSQL relational databas
 
 - null
 - string `UTF-8/16/32` 
+- bool
 - int16
 - int32
 - int64
@@ -24,6 +25,8 @@ It is the primary data storage format for `vrdb-cpp`, a noSQL relational databas
 - float128
 - decimal `no loss of precision`
 - datetime
+- daterange
+- interval
 - timespan
 - blob
 - blob_ref
@@ -175,6 +178,12 @@ PROP: "Property inside a document"
 ```
 
 ```
+#MODULE "BOOLEAN_VALUE"
+
+(BYTE)
+```
+
+```
 #MODULE "{intX}_VALUE"
 #MODULE "{uintX}_VALUE"
 #MODULE "{floatX}_VALUE"
@@ -187,7 +196,8 @@ PROP: "Property inside a document"
 #MODULE "{datetime}_VALUE"
 
 (UINT_64 [DATETIME])
-(UINT_16 [TIMEZONE])
+(UINT_16 [TIMEZONE LENGTH]) // TIMEZONE
+(BYTE[] [TIMEZONE BYTES])
 ```
 
 ```
@@ -195,6 +205,16 @@ PROP: "Property inside a document"
 
 (INT_64 [TIMESPAN])
 ```
+
+```
+#MODULE "DATERANGE_VALUE"
+
+(UINT_64 [START DATE])
+(UINT_64 [END DATE])
+(UINT_16 [TIMEZONE SIZE])
+(BYTE[] [TIMEZONE BYTES])
+```
+
 ```
 #MODULE "{blob}_VALUE"
 
@@ -326,6 +346,7 @@ Data types are 2 bytes in length
 - string UTF-8 [10, 8]
 - string UTF-16 [10, 16]
 - string UTF-32 [10, 32]
+- bool [11, 1]
 - int16 [20, 16]
 - int32 [20, 32]
 - int64 [20, 64]
@@ -340,8 +361,9 @@ Data types are 2 bytes in length
 - decimal [31, 128]
 - datetime [41, 0]
 - timespan [41, 1]
+- daterange [41, 2]
 - blob [50, 0]
-- blob_ref [50, 10]
+- blob_ref [50, 1]
 - json [60, 0]
 - document [60, 1]
 - guid [70, 0]
