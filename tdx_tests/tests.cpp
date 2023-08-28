@@ -18,6 +18,7 @@
 #include "test_uint16.hpp"
 #include "test_uint32.hpp"
 #include "test_uint64.hpp"
+#include "test_daterange.hpp"
 
 void run_tests();
 
@@ -32,12 +33,13 @@ void run_tests() {
     test_boolean();
     test_blob();
     test_datetime();
+    test_timespan();
+    test_daterange();
     test_float32();
     test_float64();
     test_int16();
     test_int32();
     test_int64();
-    test_timespan();
     test_uint16();
     test_uint32();
     test_uint64();

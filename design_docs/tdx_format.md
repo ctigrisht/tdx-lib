@@ -211,8 +211,6 @@ PROP: "Property inside a document"
 
 (UINT_64 [START DATE])
 (UINT_64 [END DATE])
-(UINT_16 [TIMEZONE SIZE])
-(BYTE[] [TIMEZONE BYTES])
 ```
 
 ```
