@@ -66,32 +66,10 @@ namespace tdx_values {
 
     tdx_daterange tdx_daterange::parse(std::span<stdbyte> &value) {
         int64_t first_value;
-        stdbyte *sub_first = new stdbyte[sizeof(int64_t)]{
-                value[0],
-                value[1],
-                value[2],
-                value[3],
-                value[4],
-                value[5],
-                value[6],
-                value[7],
-        };
-        memcpy(&first_value, sub_first, sizeof(int64_t));
-        delete[] sub_first;
+        memcpy(&first_value, value.subspan(0, 8).data(), sizeof(int64_t));
 
         int64_t last_value;
-        stdbyte *sub_last = new stdbyte[sizeof(int64_t)]{
-                value[8],
-                value[9],
-                value[10],
-                value[11],
-                value[12],
-                value[13],
-                value[14],
-                value[15],
-        };
-        memcpy(&last_value, sub_last, sizeof(int64_t));
-        delete[] sub_last;
+        memcpy(&last_value, value.subspan(8, 8).data(), sizeof(int64_t));
 
         return tdx_daterange{{first_value, last_value}};
     }
