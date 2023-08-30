@@ -94,7 +94,8 @@ namespace tdx_values {
                     return std::byte(character);
                 });
 
-        byte_vector ret_bytes;
+        byte_vector ret_bytes{};
+        ret_bytes.reserve(length);
 
         for (int i = 0; i < length; i++)
             ret_bytes.push_back(tmp_bytes[i]);

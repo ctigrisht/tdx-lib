@@ -7,11 +7,11 @@ namespace tdx_values {
 
         auto l_value = value.value();
 
-        auto value_first = l_value[0];
-        auto value_last = l_value[1];
+        int64_t value_first = l_value[0];
+        int64_t value_last = l_value[1];
 
-        stdbyte *bytes_first = static_cast<std::byte *>(static_cast<void *>(&value_first));
-        stdbyte *bytes_last = static_cast<std::byte *>(static_cast<void *>(&value_last));
+//        stdbyte *bytes_first = static_cast<std::byte *>(static_cast<void *>(&value_first));
+//        stdbyte *bytes_last = static_cast<std::byte *>(static_cast<void *>(&value_last));
 
 
         byte_vector final_vec = {};
@@ -24,41 +24,41 @@ namespace tdx_values {
 //            for (int i = 0; i < sizeof(int64_t) ++i) {
 //
 //            }
-            final_vec[0] = bytes_first[0];
-            final_vec[1] = bytes_first[1];
-            final_vec[2] = bytes_first[2];
-            final_vec[3] = bytes_first[3];
-            final_vec[4] = bytes_first[4];
-            final_vec[5] = bytes_first[5];
-            final_vec[6] = bytes_first[6];
-            final_vec[7] = bytes_first[7];
-
-            final_vec[8] = bytes_last[0];
-            final_vec[9] = bytes_last[1];
-            final_vec[10] = bytes_last[2];
-            final_vec[11] = bytes_last[3];
-            final_vec[12] = bytes_last[4];
-            final_vec[13] = bytes_last[5];
-            final_vec[14] = bytes_last[6];
-            final_vec[15] = bytes_last[7];
-
-//            final_vec[0] = (stdbyte) (value_first << 0);
-//            final_vec[1] = (stdbyte) (value_first << 8 * 1);
-//            final_vec[2] = (stdbyte) (value_first << 8 * 2);
-//            final_vec[3] = (stdbyte) (value_first << 8 * 3);
-//            final_vec[4] = (stdbyte) (value_first << 8 * 4);
-//            final_vec[5] = (stdbyte) (value_first << 8 * 5);
-//            final_vec[6] = (stdbyte) (value_first << 8 * 6);
-//            final_vec[7] = (stdbyte) (value_first << 8 * 7);
+//            final_vec[0] = bytes_first[0];
+//            final_vec[1] = bytes_first[1];
+//            final_vec[2] = bytes_first[2];
+//            final_vec[3] = bytes_first[3];
+//            final_vec[4] = bytes_first[4];
+//            final_vec[5] = bytes_first[5];
+//            final_vec[6] = bytes_first[6];
+//            final_vec[7] = bytes_first[7];
 //
-//            final_vec[8] = (stdbyte) (value_last << 0);
-//            final_vec[9] = (stdbyte) (value_last << 8 * 1);
-//            final_vec[10] = (stdbyte) (value_last << 8 * 2);
-//            final_vec[11] = (stdbyte) (value_last << 8 * 3);
-//            final_vec[12] = (stdbyte) (value_last << 8 * 4);
-//            final_vec[13] = (stdbyte) (value_last << 8 * 5);
-//            final_vec[14] = (stdbyte) (value_last << 8 * 6);
-//            final_vec[15] = (stdbyte) (value_last << 8 * 7);
+//            final_vec[8] = bytes_last[0];
+//            final_vec[9] = bytes_last[1];
+//            final_vec[10] = bytes_last[2];
+//            final_vec[11] = bytes_last[3];
+//            final_vec[12] = bytes_last[4];
+//            final_vec[13] = bytes_last[5];
+//            final_vec[14] = bytes_last[6];
+//            final_vec[15] = bytes_last[7];
+
+            final_vec[0] = static_cast<stdbyte>(value_first >> 8 * 0);
+            final_vec[1] = static_cast<stdbyte>(value_first >> 8 * 1);
+            final_vec[2] = static_cast<stdbyte>(value_first >> 8 * 2);
+            final_vec[3] = static_cast<stdbyte>(value_first >> 8 * 3);
+            final_vec[4] = static_cast<stdbyte>(value_first >> 8 * 4);
+            final_vec[5] = static_cast<stdbyte>(value_first >> 8 * 5);
+            final_vec[6] = static_cast<stdbyte>(value_first >> 8 * 6);
+            final_vec[7] = static_cast<stdbyte>(value_first >> 8 * 7);
+
+            final_vec[8] = static_cast<stdbyte>(value_last >> 8 * 0);
+            final_vec[9] = static_cast<stdbyte>(value_last >> 8 * 1);
+            final_vec[10] = static_cast<stdbyte>(value_last >> 8 * 2);
+            final_vec[11] = static_cast<stdbyte>(value_last >> 8 * 3);
+            final_vec[12] = static_cast<stdbyte>(value_last >> 8 * 4);
+            final_vec[13] = static_cast<stdbyte>(value_last >> 8 * 5);
+            final_vec[14] = static_cast<stdbyte>(value_last >> 8 * 6);
+            final_vec[15] = static_cast<stdbyte>(value_last >> 8 * 7);
 
             return {std::move(final_vec)};
         }

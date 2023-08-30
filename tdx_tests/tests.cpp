@@ -35,6 +35,7 @@ void run_tests() {
     test_datetime();
     test_timespan();
     test_daterange();
+    test_daterange_invertedstamps_constructor();
     test_float32();
     test_float64();
     test_int16();

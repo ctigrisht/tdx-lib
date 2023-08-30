@@ -1,6 +1,7 @@
 #pragma once
 
 #include "values_cpp_includes.hpp"
+#include "json/single_include/nlohmann/json.hpp"
 
 namespace tdx_values{
 
@@ -8,17 +9,26 @@ namespace tdx_values{
     public:
         tdx_json() { value = std::nullopt; }
 
-        explicit tdx_json(nlohmann::json l_value) {
-            value = l_value;
+        tdx_json(std::string l_json){
+            njson json_obj = nlohmann::json::parse(l_json);
+            value = std::move(json_obj);
+        }
+
+        tdx_json(nlohmann::json l_value) {
+            value = std::move(l_value);
             is_null = false;
         }
 
         tdx_value_type get_type() final { return tdx_value_type::json; }
 
         bool is_null = true;
-        std::optional<nlohmann::json> value;
+        std::optional<njson> value;
 
         tdx_bytes_result serialize() final;
-        static tdx_json parse(byte_vector value);
+        static tdx_json parse(byte_vector& value);
+
+        njson& get_ref(){
+            return value.value();
+        }
     };
 }

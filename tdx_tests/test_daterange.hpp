@@ -2,6 +2,25 @@
 
 #include "shared.hpp"
 
+void test_daterange_invertedstamps_constructor() {
+    bool passed = true;
+    auto test_name = "TESTS: test_daterange_invertedstamps_constructor";
+
+    int64_t val0 = 100000;
+    int64_t val1 = 45000;
+
+    try {
+        tdx_values::tdx_daterange{std::array<int64_t, 2>{val0, val1}};
+    } catch (std::runtime_error &ex) {
+        passed = val0 > val1;
+    }
+
+    std::cout << std::endl << test_name << " passed" << std::endl;
+
+    if (passed)
+        TEST_RESULTS[test_name].passed++;
+    else TEST_RESULTS[test_name].failed++;
+}
 
 void test_daterange() {
     auto test_name = "TESTS: tdx_daterange";
@@ -11,7 +30,7 @@ void test_daterange() {
     std::vector<tdx_values::tdx_daterange> tests{
             tdx_values::tdx_daterange{std::array<int64_t, 2>{9384298, 2903219039}},
             tdx_values::tdx_daterange{std::array<int64_t, 2>{938429, 13023219}},
-            tdx_values::tdx_daterange{2903219039}
+            tdx_values::tdx_daterange{2903219039},
     };
 
     for (auto test_value: tests) {
@@ -29,5 +48,9 @@ void test_daterange() {
                 << "Test '" << test_value.value.value()[0] << " : " << test_value.value.value()[1] << " "
                 << (passed ? "passed" : "failed")
                 << std::endl;
+
+        if (passed)
+            TEST_RESULTS[test_name].passed++;
+        else TEST_RESULTS[test_name].failed++;
     }
 }

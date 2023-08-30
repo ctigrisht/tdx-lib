@@ -22,7 +22,7 @@ namespace tdx_values {
         decimal = 130, // TODO
         datetime = 140,
         timespan = 150,
-        daterange = 141, // TODO
+        daterange = 141,
         blob = 160,
         blob_ref = 170,
         json = 180, // TODO
