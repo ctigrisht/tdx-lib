@@ -7,6 +7,7 @@
 #include "../shared_types.hpp"
 #include "tdx_type.hpp"
 #include "typedefs.hpp"
+//#include "../intermediate_includes.hpp"
 
 namespace tdx_values {
     class tdx_value {
@@ -23,10 +24,5 @@ namespace tdx_values {
         virtual ~tdx_value() {
 
         }
-
-//        std::string get_type_name() {
-//            return (std::string) magic_enum::enum_name(get_type());
-//            //return "";
-//        }
     };
 }

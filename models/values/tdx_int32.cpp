@@ -35,7 +35,7 @@ namespace tdx_values{
 
     tdx_int32 tdx_int32::parse(byte_vector& value){
         auto length = value.size();
-        const auto type_size = sizeof( std::int_fast32_t );
+        const auto type_size = sizeof( std::int32_t );
 
         if (length > type_size)
             throw std::exception();
@@ -56,7 +56,7 @@ namespace tdx_values{
             }
         }
 
-        std::int_fast32_t cast_value;
+        std::int32_t cast_value;
         memcpy( &cast_value, buffer, type_size);
 
         return tdx_int32(cast_value);

@@ -25,7 +25,7 @@ namespace tdx_values {
         daterange = 141,
         blob = 160,
         blob_ref = 170,
-        json = 180, // TODO
+        json = 180, // TODO !!bug!!
         document = 190, // TODO
 
         guid = 1000,

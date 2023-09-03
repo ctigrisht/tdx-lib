@@ -19,6 +19,7 @@
 #include "test_uint32.hpp"
 #include "test_uint64.hpp"
 #include "test_daterange.hpp"
+#include "test_json.hpp"
 
 void run_tests();
 
@@ -44,6 +45,7 @@ void run_tests() {
     test_uint16();
     test_uint32();
     test_uint64();
+    test_json();
 
     int passed = 0;
     int failed = 0;

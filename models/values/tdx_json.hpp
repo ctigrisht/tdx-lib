@@ -16,12 +16,10 @@ namespace tdx_values{
 
         tdx_json(nlohmann::json l_value) {
             value = std::move(l_value);
-            is_null = false;
         }
 
         tdx_value_type get_type() final { return tdx_value_type::json; }
 
-        bool is_null = true;
         std::optional<njson> value;
 
         tdx_bytes_result serialize() final;
