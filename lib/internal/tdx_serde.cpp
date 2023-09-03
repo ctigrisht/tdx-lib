@@ -2,7 +2,7 @@
 #include "../../models/includes.hpp"
 
 namespace tdx_serde{
-    tdx_models::tdx_document _deserialize(){
+    tdx_models::tdx_sub_document _deserialize(){
         throw "Not implemented";
     }
 

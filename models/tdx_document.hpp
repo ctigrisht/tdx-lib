@@ -11,7 +11,7 @@
 // using namespace std;
 
 namespace tdx_models{
-    class tdx_document
+    class tdx_sub_document
     {
     private:
         /* data */
@@ -23,15 +23,15 @@ namespace tdx_models{
         std::vector<tdx_link> links;
 
         std::variant<byte_vector, std::string> serialize();
-        static std::variant<tdx_document, std::string> parse(byte_vector& bytes);
+        static std::variant<tdx_sub_document, std::string> parse(byte_vector& bytes);
     };
     
-//    tdx_document::tdx_document(/* args */)
+//    tdx_sub_document::tdx_sub_document(/* args */)
 //    {
 //
 //    }
 //
-//    tdx_document::~tdx_document()
+//    tdx_sub_document::~tdx_sub_document()
 //    {
 //
 //    }

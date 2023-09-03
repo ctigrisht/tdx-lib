@@ -21,8 +21,6 @@ namespace tdx_values {
 
         virtual tdx_value_type get_type() = 0;
 
-        virtual ~tdx_value() {
-
-        }
+        virtual ~tdx_value() {}
     };
 }

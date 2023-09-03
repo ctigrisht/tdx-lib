@@ -2,9 +2,8 @@
 
 #include <string>
 #include <memory>
-//#include "values/tdx_value.hpp"
 #include "values/extern_includes.hpp"
-#include "typedefs/tdx_value_for_property.hpp"
+#include "typedefs/tdx_value.hpp"
 
 namespace tdx_models{
     class tdx_property{

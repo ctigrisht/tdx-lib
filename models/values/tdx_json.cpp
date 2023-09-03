@@ -1,5 +1,5 @@
 #include "tdx_json.hpp"
-#include "json/single_include/nlohmann/json.hpp";
+#include "json/single_include/nlohmann/json.hpp"
 
 namespace tdx_values {
     tdx_bytes_result tdx_json::serialize() {

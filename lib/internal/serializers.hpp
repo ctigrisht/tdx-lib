@@ -42,7 +42,7 @@ namespace internal_serializers {
 //
 //    byte_vector serialize_json(tdx_json& value);
 //
-//    byte_vector serialize_document(tdx_document& value);
+//    byte_vector serialize_document(tdx_sub_document& value);
 
 //    bytes_uptr serialize_guid();
 //
