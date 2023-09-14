@@ -71,19 +71,28 @@ namespace internal_serializers {
 
 //    bytes_uptr serialize_int8();
 //    bytes_uptr serialize_uint8();
-    byte_vector serialize_int16(tdx_int16 &value);
+//    byte_vector serialize_int16(tdx_int16 &value);
 
-    byte_vector serialize_uint16(tdx_uint16 &value);
+    std::array<stdbyte, 2> serialize_uint16(uint16_t &value) {
+        auto array = std::array<stdbyte, 2>{
+                static_cast<stdbyte>(value >> 8 * 0),
+                static_cast<stdbyte>(value >> 8 * 1)
+        };
+
+        // TODO big endian support
+
+        return array;
+    }
 
     byte_vector serialize_int32(tdx_int32 &value);
 
     std::array<stdbyte, 4> serialize_int32(int32_t value) { // TODO big endian support
-        auto byte_data = static_cast<std::byte*>(static_cast<void*>(&value));
+        auto byte_data = static_cast<std::byte *>(static_cast<void *>(&value));
         std::array<stdbyte, 4> final_bytes{
-            byte_data[0],
-            byte_data[1],
-            byte_data[2],
-            byte_data[3]
+                byte_data[0],
+                byte_data[1],
+                byte_data[2],
+                byte_data[3]
         };
 
         return final_bytes;

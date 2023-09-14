@@ -17,7 +17,7 @@ namespace internal_serializers {
 ////    bytes_uptr serialize_uint8();
 //    byte_vector serialize_int16(tdx_int16& value);
 //
-//    byte_vector serialize_uint16(tdx_uint16& value);
+    std::array<stdbyte, 2> serialize_uint16(uint16_t value);
 //
 //    byte_vector serialize_int32(tdx_int32& value);
     std::array<stdbyte, 4> serialize_int32(int32_t value);

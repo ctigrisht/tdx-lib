@@ -20,5 +20,5 @@
 #include "tdx_blob.hpp"
 #include "tdx_blob_ref.hpp"
 #include "tdx_json.hpp"
-#include "tdx_sub_document.hpp"
+#include "tdx_free_document.hpp"
 #include "tdx_daterange.hpp"

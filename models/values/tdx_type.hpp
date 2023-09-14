@@ -2,6 +2,7 @@
 
 #include <array>
 #include "result.hpp"
+#include "../result_codes_table.hpp"
 
 namespace tdx_values {
     enum struct tdx_value_type : int32_t {
@@ -11,21 +12,21 @@ namespace tdx_values {
         int16 = 30,
         int32 = 40,
         int64 = 50,
-        int128 = 51, // TODO
+        int128 = 51, // TODO later
         uint16 = 60,
         uint32 = 70,
         uint64 = 80,
-        uint128 = 90, // TODO
+        uint128 = 90, // TODO later
         float32 = 100,
         float64 = 110,
-        float128 = 120, // TODO
-        decimal = 130, // TODO
+        float128 = 120, // TODO later
+        decimal = 130, // TODO later
         datetime = 140,
         timespan = 150,
         daterange = 141,
         blob = 160,
         blob_ref = 170,
-        json = 180, // TODO !!bug!!
+        json = 180,
         document = 190, // TODO
 
         guid = 1000,
@@ -37,7 +38,7 @@ namespace tdx_values {
         link_ref = 5000,
     };
 
-    static vr::result<std::array<std::byte, 2>, std::string> get_type_code(tdx_value_type type) {
+    static vr::result<std::array<std::byte, 2>, std::uint32_t> get_type_code(tdx_value_type type) {
         switch (type) {
             case tdx_value_type::null:
                 return {{stdbyte(0), stdbyte(1)}};
@@ -92,7 +93,7 @@ namespace tdx_values {
             case tdx_value_type::link_ref:
                 return {{stdbyte(254), stdbyte(0)}};
             default:
-                return {"Invalid type"};
+                return { tdx_models::CODE_UNSUPPORTED_ENUM };
         };
     }
 }

@@ -41,7 +41,7 @@ namespace vr {
         }
 
         TError& get_error() {
-            return std::get<TValue>(_data);
+            return std::get<TError>(_data);
         }
     };
 

@@ -82,7 +82,7 @@ namespace tdx_values {
         }
     }
 
-    byte_vector serialize_string_utf8(std::string& value) {
+    byte_vector serialize_string_utf8(std::string& value) { // TODO put this in generic serde lib
         auto length = value.length();
 
         std::byte tmp_bytes[length];
