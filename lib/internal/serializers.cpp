@@ -9,6 +9,7 @@
 #include "endian_tester.hpp"
 #include "../../models/values/tdx_values.hpp"
 #include "../../models/string_encoding.hpp"
+#include "../../models/tdx_document.hpp"
 
 using namespace tdx_internal;
 using namespace tdx_models;
@@ -53,12 +54,12 @@ namespace internal_serializers {
         throw "UTF-32 not implemented";
     }
 
-    byte_vector serialize_string(tdx_string &value) {
+    vr::result<byte_vector, uint32_t> serialize_string(tdx_string& value) {
         switch (value.encoding) {
             case tdx_string_encoding::UTF_8: {
                 if (value.value_u8.has_value())
                     return serialize_string_utf8(value.value_u8.value());
-                return {};
+                return {CODE_INVALID_DATA};
             }
             case tdx_string_encoding::UTF_16:
                 throw;
@@ -118,7 +119,7 @@ namespace internal_serializers {
 
     byte_vector serialize_json(tdx_json &value);
 
-    byte_vector serialize_document(tdx_sub_document &value);
+    byte_vector serialize_document(tdx_document &value);
 
 //    bytes_uptr serialize_guid();
 //

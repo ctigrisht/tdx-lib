@@ -11,13 +11,14 @@ namespace internal_serializers {
 //    byte_vector serialize_string_utf16(std::u16string& value);
 //    byte_vector serialize_string_utf32(std::u32string& value);
 //
-//    byte_vector serialize_string(tdx_string& value);
+    vr::result<byte_vector, uint32_t> serialize_string(tdx_string& value);
+    vr::result<byte_vector, uint32_t> serialize_native_string(tdx_string& value);
 //
 ////    bytes_uptr serialize_int8();
 ////    bytes_uptr serialize_uint8();
 //    byte_vector serialize_int16(tdx_int16& value);
 //
-    std::array<stdbyte, 2> serialize_uint16(uint16_t value);
+    std::array<stdbyte, 2> serialize_uint16(uint16_t& value);
 //
 //    byte_vector serialize_int32(tdx_int32& value);
     std::array<stdbyte, 4> serialize_int32(int32_t value);

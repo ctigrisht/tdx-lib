@@ -38,6 +38,63 @@ namespace tdx_values {
         link_ref = 5000,
     };
 
+    static vr::result<tdx_value_type, uint32_t> get_type_code(std::array<stdbyte, 2> bytes) {
+        if (bytes[0] == stdbyte(0) && bytes[1] == stdbyte(1))
+            return {tdx_value_type::null};
+        if (bytes[0] == stdbyte(10) && bytes[1] == stdbyte(8))
+            return {tdx_value_type::string};
+        if (bytes[0] == stdbyte(11) && bytes[1] == stdbyte(1))
+            return {tdx_value_type::boolean};
+        if (bytes[0] == stdbyte(20) && bytes[1] == stdbyte(16))
+            return {tdx_value_type::int16};
+        if (bytes[0] == stdbyte(20) && bytes[1] == stdbyte(32))
+            return {tdx_value_type::int32};
+        if (bytes[0] == stdbyte(20) && bytes[1] == stdbyte(64))
+            return {tdx_value_type::int64};
+        if (bytes[0] == stdbyte(20) && bytes[1] == stdbyte(128))
+            return {tdx_value_type::int128};
+        if (bytes[0] == stdbyte(21) && bytes[1] == stdbyte(16))
+            return {tdx_value_type::uint16};
+        if (bytes[0] == stdbyte(21) && bytes[1] == stdbyte(32))
+            return {tdx_value_type::uint32};
+        if (bytes[0] == stdbyte(21) && bytes[1] == stdbyte(64))
+            return {tdx_value_type::uint64};
+        if (bytes[0] == stdbyte(21) && bytes[1] == stdbyte(128))
+            return {tdx_value_type::uint128};
+        if (bytes[0] == stdbyte(30) && bytes[1] == stdbyte(32))
+            return {tdx_value_type::float32};
+        if (bytes[0] == stdbyte(30) && bytes[1] == stdbyte(64))
+            return {tdx_value_type::float64};
+        if (bytes[0] == stdbyte(30) && bytes[1] == stdbyte(128))
+            return {tdx_value_type::float128};
+        if (bytes[0] == stdbyte(31) && bytes[1] == stdbyte(128))
+            return {tdx_value_type::decimal};
+        if (bytes[0] == stdbyte(41) && bytes[1] == stdbyte(0))
+            return {tdx_value_type::datetime};
+        if (bytes[0] == stdbyte(41) && bytes[1] == stdbyte(1))
+            return {tdx_value_type::timespan};
+        if (bytes[0] == stdbyte(41) && bytes[1] == stdbyte(2))
+            return {tdx_value_type::daterange};
+        if (bytes[0] == stdbyte(50) && bytes[1] == stdbyte(0))
+            return {tdx_value_type::blob};
+        if (bytes[0] == stdbyte(50) && bytes[1] == stdbyte(1))
+            return {tdx_value_type::blob_ref};
+        if (bytes[0] == stdbyte(60) && bytes[1] == stdbyte(0))
+            return {tdx_value_type::json};
+        if (bytes[0] == stdbyte(60) && bytes[1] == stdbyte(1))
+            return {tdx_value_type::document};
+        if (bytes[0] == stdbyte(70) && bytes[1] == stdbyte(0))
+            return {tdx_value_type::guid};
+        if (bytes[0] == stdbyte(70) && bytes[1] == stdbyte(1))
+            return {tdx_value_type::uint64_id};
+        if (bytes[0] == stdbyte(100) && bytes[1] == stdbyte(0))
+            return {tdx_value_type::array};
+        if (bytes[0] == stdbyte(254) && bytes[1] == stdbyte(0))
+            return {tdx_value_type::link_ref};
+
+        return {tdx_models::CODE_INVALID_DATA};
+    }
+
     static vr::result<std::array<std::byte, 2>, std::uint32_t> get_type_code(tdx_value_type type) {
         switch (type) {
             case tdx_value_type::null:
@@ -93,7 +150,7 @@ namespace tdx_values {
             case tdx_value_type::link_ref:
                 return {{stdbyte(254), stdbyte(0)}};
             default:
-                return { tdx_models::CODE_UNSUPPORTED_ENUM };
+                return {tdx_models::CODE_UNSUPPORTED_ENUM};
         };
     }
 }
